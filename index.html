@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ko3.5.0的改动</title>
+    <style>
+        body{
+            padding: 10px
+        }
+        h1 {
+            font-size: 18px;
+        }
+        h2{
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<h1>
+<a href="https://github.com/knockout/knockout/releases/tag/v3.5.0-beta">ko改动说明</a></h1>
+<h1><a href="https://github.com/knockout/knockout/milestone/9?closed=1">ko 3.5.0里程碑涉及的issue</a></h1>
+    <h1>1.foreach的改动</h1>
+    <h2>foreach指定了as之后，循环内部访问外部属性 就不需要$parent了</h2>
+    <div>
+        <div data-bind="foreach:{data:list, as: 'item'}">
+            <span data-bind="text:item.id"></span>
+            <span data-bind="text:outterAttr"></span>
+            <br>
+        </div>
+    </div>
+    <h2>foreach 大数据量改变时的性能，includeDestroyed</h2>
+    <h1>2.添加childrenComplete指令 相当于afterrender</h1>
+    <div data-bind="childrenComplete:childrenCompletecallback">
+        <span id="test" data-bind="text:outterAttr"></span>
+    </div>
+    <pre><code data-bind="text:code2">
+    </code>
+    </pre>
+    <h1>3.组件中支持koDescendantsComplete方法 相当于afterrender</h1>
+    <h2>解读：相当于组件内部添加了一个afterrender方法，通知你什么时候组件加载完成</h2>
+    <div data-bind="let:{outterArr2: outterAttr}">
+        <parentmodal >
+        </parentmodal>
+    </div>
+    <h2>渲染完成顺序</h2>
+    <div data-bind="foreach:renderedChild">
+        <span data-bind="text:$data"></span>
+    </div>
+    <h1>4.绑定String值支持`（反引号了）</h1>
+    <div data-bind="html:`
+        <div>
+            testme hihih
+        </div>
+        <span>换行</span>
+    `"></div>
+    <h1>5.Observable arrays 添加了 sorted 和 reversed方法</h1>
+    <h2>解读 和array的sort和revers方法不同，此方法无副作用，仅仅是返回数据的拷贝</h2>
+    原始数组：
+    <div data-bind="foreach: arrays">
+        <span data-bind="text:$data"></span>
+    </div>
+    排序后：
+    <div data-bind="foreach: sortarrays">
+        <span data-bind="text:$data"></span>
+    </div>
+    反转后：
+    <div data-bind="foreach: reversearrays">
+        <span data-bind="text:$data"></span>
+    </div>
+    <h1>6.添加了class 指令</h1>
+    <div data-bind="class:classes, css:{class4:true,class1:true}">
+        多个样式：class1,class2,class3
+    </div>
+    <h1>7.using指令，类似于with，但性能更高</h1>
+    <h1>8.hidden指令 和visible相反</h1>
+    <h2>解读，再也不用 一个visible：flag 另一个 visible:!flag()这么写了</h2>
+    <h1>9.let指令 </h1>
+    <h2>解读：data-bind="let:{outterArr2: outterAttr}" 这样在当前div下的所有元素都可以使用outterArr2了，不必原来的$parentContext.$parent了</h2>
+    <h2>你还可以这么用 ko.applyBindings(viewModel, element, {
+        _: require('lodash')
+        });</h2>
+    <h1>10.一些性能改进，字符串模板编译时添加缓存</h1>
+    <h1>11.observables添加spectate事件，后续更新</h1>
+    <h1>12.computed添加getDependencies方法 可以查看相应的属性依赖</h1>
+    <h1>13.ko.when, 当条件或表达式为true时只运行一次， 后面可以是监听对象或表达式</h1>
+    <h2>例子： ko.when(function () {  console.log('only run once')} , viewmodel.runonce)</h2>
+    <h1>14.ko.isObservableArray 可用于判断是否是ObservableArray</h1>
+    <h1>15.style 指令默认使用jQuery，可以使用background-color这样的标准样式名称（原来需要写成backgrounColor）</h1>
+    <h1>16.如果出现 "<- - /ko -->" 标签不匹配 ko现在会报错</h1>
+
+    <h1>修复的bug</h1>
+<h2><a href="https://github.com/knockout/knockout/issues?page=1&q=milestone%3A3.5.0+is%3Aclosed+label%3A%22type%3A+bug%22"></a>https://github.com/knockout/knockout/issues?page=1&q=milestone%3A3.5.0+is%3Aclosed+label%3A%22type%3A+bug%22</h2>
+<script src="ko-3.5.0-beta.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
