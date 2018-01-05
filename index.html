@@ -13,6 +13,10 @@
         h2{
             font-size: 16px;
         }
+        code    {
+            background-color: #eee;
+            padding: 4px;
+        }
     </style>
 </head>
 <body>
@@ -21,6 +25,9 @@
 <h1><a href="https://github.com/knockout/knockout/milestone/9?closed=1">ko 3.5.0里程碑涉及的issue</a></h1>
     <h1>1.foreach的改动</h1>
     <h2>foreach指定了as之后，循环内部访问外部属性 就不需要$parent了</h2>
+    <code data-bind="text:code1">
+
+    </code>
     <div>
         <div data-bind="foreach:{data:list, as: 'item'}">
             <span data-bind="text:item.id"></span>

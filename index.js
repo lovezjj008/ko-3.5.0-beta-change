@@ -1,4 +1,11 @@
 var viewmodel = {
+  code1: '<div>\
+  <div data-bind="foreach:{data:list, as: \'item\'}">\
+    <span data-bind="text:item.id"></span>\
+    <span data-bind="text:outterAttr"></span>\
+    <br>\
+    </div>\
+    </div>',
   list: ko.observableArray([{
     id: 1,
     name: 1
